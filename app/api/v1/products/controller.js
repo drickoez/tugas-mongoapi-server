@@ -2,6 +2,9 @@ const Products = require("./model");
 const {
   getAllProducts,
   createProducts,
+  updateProducts,
+  getOneProducts,
+  deleteProducts,
 } = require("../../../services/mongoose/products");
 
 const create = async (req, res, next) => {
@@ -29,7 +32,7 @@ const index = async (req, res, next) => {
 
 const find = async (req, res, next) => {
   try {
-    const result = await getOneCategories(req);
+    const result = await getOneProducts(req);
 
     res.status(200).json({
       data: result,
@@ -41,7 +44,7 @@ const find = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const result = await updateCategories(req);
+    const result = await updateProducts(req);
 
     res.status(200).json({
       data: result,
@@ -53,7 +56,7 @@ const update = async (req, res, next) => {
 
 const destroy = async (req, res, next) => {
   try {
-    const result = await deleteCategories(req);
+    const result = await deleteProducts(req);
     res.status(200).json({
       data: result,
     });

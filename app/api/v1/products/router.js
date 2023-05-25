@@ -3,7 +3,7 @@ const router = express();
 const { create, index, find, update, destroy } = require("./controller");
 
 router.get("/products", index);
-router.get("/products/:id", find);
+router.get("/product/:id", find);
 router.put("/products/:id", update);
 router.delete("/products/:id", destroy);
 router.post("/products", create);
