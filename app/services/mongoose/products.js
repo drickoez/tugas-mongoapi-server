@@ -24,14 +24,14 @@ const getOneProducts = async (req) => {
 
   const result = await Products.findOne({ _id: id });
 
-  if (!result) throw new NotFoundError(`Tidak ada Kategori dengan id :  ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada Product dengan id :  ${id}`);
 
   return result;
 };
 
 const updateProducts = async (req) => {
   const { id } = req.params;
-  const { name } = req.body;
+  const { name, price, stocks, status } = req.body;
 
   const check = await Products.findOne({
     name,
@@ -42,11 +42,11 @@ const updateProducts = async (req) => {
 
   const result = await Products.findOneAndUpdate(
     { _id: id },
-    { name },
+    { name, price, stocks, status },
     { new: true, runValidators: true }
   );
 
-  if (!result) throw new NotFoundError(`Tidak ada Kategori dengan id :  ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada Product dengan id :  ${id}`);
 
   return result;
 };
@@ -54,13 +54,11 @@ const updateProducts = async (req) => {
 const deleteProducts = async (req) => {
   const { id } = req.params;
 
-  const result = await Products.findOne({
+  const result = await Products.findOneAndDelete({
     _id: id,
   });
 
-  if (!result) throw new NotFoundError(`Tidak ada Kategori dengan id :  ${id}`);
-
-  await result.remove();
+  if (!result) throw new NotFoundError(`Tidak ada Product dengan id :  ${id}`);
 
   return result;
 };
