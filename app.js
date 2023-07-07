@@ -8,10 +8,12 @@ const app = express();
 
 // router
 const productsRouter = require("./app/api/v1/products/router");
+const productsRouterV2 = require("./app/api/v2/products/router");
 
 const notFoundMiddleware = require("./app/middlewares/not-found");
 const handleErrorMiddleware = require("./app/middlewares/handle-error");
 const v1 = "/api/v1";
+const v2 = "/api/v2";
 
 app.use(logger("dev"));
 app.use(cors());
@@ -27,6 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(v1, productsRouter);
+app.use(v2, productsRouterV2);
 
 app.use(notFoundMiddleware);
 app.use(handleErrorMiddleware);
